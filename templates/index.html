@@ -33,7 +33,7 @@
             {% for row in range(9) %}
             <tr>
                 {% for col in range(9) %}
-                <td></td>
+                <td contenteditable="false"></td>
                 {% endfor %}
             </tr>
             {% endfor %}
@@ -66,15 +66,17 @@
     <div class="container">
         <form>
             <div class="button-space"></div>
-            <button id="manually-enter">Manually Enter</button>
-            <button id="randomly-generate">Randomly Generate</button>
+            <button type="button" id="manually-enter">Manually Enter</button>
+            <button type="button" id="randomly-generate">Randomly Generate</button>
             <div class="button-space"></div>
-            <button class="difficulty-button">Easy</button>
-            <button class="difficulty-button">Medium</button>
-            <button class="difficulty-button">Hard</button>
-            <button class="difficulty-button">Expert</button>
+            <button type="button" id="easy-button" disabled>Easy</button>
+            <button type="button" id="medium-button" disabled>Medium</button>
+            <button type="button" id="hard-button" disabled>Hard</button>
+            <button type="button" id="expert-button" disabled>Expert</button>
+            <div class="button-space"></div>
+            <button type="button" id="solve" disabled>Solve</button>
         </form>
-        <p id="selected-option"></p> <!-- Paragraph to display the selected option -->
+        <p id="selected-option"></p>
     </div>
 </body>
 </html>
