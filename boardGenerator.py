@@ -61,61 +61,35 @@ expert: avg 17 numbers on board, ~21% chance of a number being given
 '''
 
 def remove_numbers(board, difficulty): # Remove numbers until the desired difficulty is reached
-    removeNum = 0
     if difficulty == 0: # easy difficulty
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                removeNum = random.randInt(0, 100)
-                if removeNum > 47:
-                    board[i][j] = 0
+        remOrNo = 47
     elif difficulty == 1: # medium difficulty
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                removeNum = random.randInt(0, 100)
-                if removeNum > 37:
-                    board[i][j] = 0
+        remOrNo = 37
     elif difficulty == 2: # hard difficulty
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                removeNum = random.randInt(0, 100)
-                if removeNum > 27:
-                    board[i][j] = 0
+        remOrNo = 27
     elif difficulty == 3: # expert difficulty
-        for i in range(len(board)):
+        remOrNo = 21
+    for i in range(len(board)):
             for j in range(len(board[0])):
                 removeNum = random.randInt(0, 100)
-                if removeNum > 21:
+                if removeNum > remOrNo:
                     board[i][j] = 0
 
-def save_solution(board, difficulty): # Save the solution in a text file
+def save_board(board, difficulty): # Save the solution in a text file
     if (difficulty == 0): # easy difficulty
-        file = open("easy.txt", "w")
-        for i in range(len(board)): # Iterate through the board
-            for j in range(len(board[0])): # Iterate through the row
-                file.write(str(board[i][j])) # Write the number to the file
-            file.write("\n")
-        file.close()
+        textFile = "easy.txt"
     elif (difficulty == 1): # medium difficulty
-        file = open("medium.txt", "w")
-        for i in range(len(board)): # Iterate through the board
-            for j in range(len(board[0])): # Iterate through the row
-                file.write(str(board[i][j])) # Write the number to the file
-            file.write("\n")
-        file.close()
+        textFile = "medium.txt"
     elif (difficulty == 2): # hard difficulty
-        file = open("hard.txt", "w")
-        for i in range(len(board)): # Iterate through the board
-            for j in range(len(board[0])): # Iterate through the row
-                file.write(str(board[i][j])) # Write the number to the file
-            file.write("\n")
-        file.close()
+        textFile = "hard.txt"
     elif (difficulty == 3): # expert difficulty
-        file = open("expert.txt", "w")
-        for i in range(len(board)): # Iterate through the board
-            for j in range(len(board[0])): # Iterate through the row
-                file.write(str(board[i][j])) # Write the number to the file
-            file.write("\n")
-        file.close()
+        textFile = "expert.txt"
+    file = open(textFile, "w")
+    for i in range(len(board)): # Iterate through the board
+        for j in range(len(board[0])): # Iterate through the row
+            file.write(str(board[i][j])) # Write the number to the file
+        file.write("\n")
+    file.close()
 
 def print_board(board): # Print the sudoku board
     print("-----------------------")
@@ -134,19 +108,19 @@ def print_board(board): # Print the sudoku board
 def generate_easy_board(board): # Generate an easy board
     generate_full_board(board) # Generate a full board
     remove_numbers(board, 0) # Remove numbers until the desired difficulty is reached
-    save_solution(board, 0)
+    save_board(board, 0) # Save the board
 
 def generate_medium_board(board): # Generate a medium board
     generate_full_board(board) # Generate a full board
     remove_numbers(board, 1) # Remove numbers until the desired difficulty is reached
-    save_solution(board, 1)
+    save_board(board, 1) # Save the board
 
 def generate_hard_board(board): # Generate a hard board
     generate_full_board(board) # Generate a full board
     remove_numbers(board, 2) # Remove numbers until the desired difficulty is reached
-    save_solution(board, 2)
+    save_board(board, 2) # Save the board
 
 def generate_expert_board(board): # Generate an expert board
     generate_full_board(board) # Generate a full board
     remove_numbers(board, 3) # Remove numbers until the desired difficulty is reached
-    save_solution(board, 3)
+    save_board(board, 3) # Save the board
