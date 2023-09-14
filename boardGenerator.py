@@ -69,10 +69,10 @@ def remove_numbers(board, difficulty): # Remove numbers until the desired diffic
         remOrNo = 27
     elif difficulty == 3: # expert difficulty
         remOrNo = 21
-    for i in range(len(board)):
-            for j in range(len(board[0])):
-                removeNum = random.randInt(0, 100)
-                if removeNum > remOrNo:
+    for i in range(len(board)): 
+            for j in range(len(board[0])): # Iterate through the board
+                removeNum = random.randInt(0, 100) # Generate a random number
+                if removeNum > remOrNo: # If the number is greater than the difficulty, remove the number
                     board[i][j] = 0
 
 def save_board(board, difficulty): # Save the solution in a text file
@@ -90,20 +90,6 @@ def save_board(board, difficulty): # Save the solution in a text file
             file.write(str(board[i][j])) # Write the number to the file
         file.write("\n")
     file.close()
-
-def print_board(board): # Print the sudoku board
-    print("-----------------------")
-    for i in range(len(board)): # Iterate through the board
-        if i % 3 == 0 and i != 0: # Print a line every 3 rows
-            print("-----------------------")
-        for j in range(len(board[0])): # Iterate through the row
-            if j % 3 == 0 and j != 0: # Print a line every 3 columns
-                print(" | ", end = "")
-            if j == 8: # Print the last number in the row
-                print(board[i][j])
-            else: # Print the number in the row
-                print(str(board[i][j]) + " ", end = "")
-    print("-----------------------")
 
 def generate_easy_board(board): # Generate an easy board
     generate_full_board(board) # Generate a full board
