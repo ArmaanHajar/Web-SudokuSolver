@@ -12,7 +12,6 @@ board = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-var txtFile = new XMLHttpRequest();
 const sudokuCells = document.querySelectorAll("td");
 
 function clearBoard() {
