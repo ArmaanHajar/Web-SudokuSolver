@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<htmll lang=""en>
     <head>
         <title>Sudoku Solver</title>
         <style>
@@ -57,10 +57,9 @@
             font-family: 'Trebuchet MS';
         }
     </style>
-    <script
-    type = "text/javascript"
-    src = "{{url_for('static', filename='buttonActivity.js')}}"
-    ></script>
+    <script type="module" src="../static/buttonActivity.js"></script>
+    <script type="module" src="../static/boardActivity.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -79,4 +78,21 @@
         <p id="selected-option"></p>
     </div>
 </body>
+<head>
+    <style>
+    footer {
+      text-align: center;
+      padding: 3px;
+      background-color: rgb(122, 213, 233);
+      color: rgb(0, 0, 0);
+    }
+    </style>
+    </head>
+    <body>
+    
+    <footer>
+      <p>Author: Armaan Hajar<br>
+      <a href="mailto:armaanhajar@gmail.com">armaanhajar@gmail.com</a></p>
+    </footer>
+    </body>
 </html>

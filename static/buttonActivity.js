@@ -1,3 +1,17 @@
+import { generateEasyBoard, generateMediumBoard, generateHardBoard, generateExpertBoard } from "../static/boardActivity.js";
+import { newBoard } from "../static/boardActivity.js";
+
+var board;
+board = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
 var txtFile = new XMLHttpRequest();
 const sudokuCells = document.querySelectorAll("td");
 
@@ -8,41 +22,14 @@ function clearBoard() {
     });
 }
 
-/* makes the buttons not work for some reason, come back to this later
-function saveBoard(board) {
-    const sudokuCells = document.querySelectorAll("td");
-    let board = [];
-    sudokuCells.forEach(cell => {
-        board.push(cell.textContent);
-    });
-    return board;
-}
-*/
-
-function updateBoard(fileName) {
-    txtFile.open("GET", "/static/numberFiles/" + fileName, true);
-    txtFile.onreadystatechange = function() {
-        if (txtFile.readyState === 4) {
-            if (txtFile.status === 200) {
-                var allText = txtFile.responseText;
-                // Check if the response is not empty
-                if (allText.length === 81) { // Sudoku grid is 9x9
-                    for (var i = 0; i < allText.length; i++) {
-                        if (allText.charAt(i) === "0") {
-                            sudokuCells[i].textContent = "";
-                        }
-                        else {
-                            sudokuCells[i].textContent = allText.charAt(i);
-                        }
-                    }
-                } 
-                else {
-                    console.error("Invalid content in the file. Expected 81 characters.");
-                }
+function updateBoard(board) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (board[i][j] != 0) {
+                sudokuCells[i * 9 + j].textContent = board[i][j];
             }
         }
-    };
-    txtFile.send(null);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -58,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const difficultyButtons = [easyButton, mediumButton, hardButton, expertButton];
 
     manuallyEnterButton.addEventListener('click', function() {
+        console.log("Manually Enter");
         clearBoard();
         manuallyEnterButton.disabled = true;
         randomlyGenerateButton.disabled = false;
@@ -70,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     randomlyGenerateButton.addEventListener('click', function() {
+        console.log("Randomly Generate");
         clearBoard();
         randomlyGenerateButton.disabled = true;
         manuallyEnterButton.disabled = false;
@@ -81,23 +70,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     easyButton.addEventListener('click', function() {
+        clearBoard();
+        generateEasyBoard(board);
         selectedOption.textContent = "Difficulty Selected: " + easyButton.textContent; // Update the displayed option
-        updateBoard("easy.txt");
+        updateBoard(newBoard);
     });
 
     mediumButton.addEventListener('click', function() {
+        clearBoard();
+        generateMediumBoard(board);
         selectedOption.textContent = "Difficulty Selected: " + mediumButton.textContent; // Update the displayed option
-        updateBoard("medium.txt");
+        updateBoard(newBoard);
     });
 
     hardButton.addEventListener('click', function() {
+        clearBoard();
+        generateHardBoard(board);
         selectedOption.textContent = "Difficulty Selected: " + hardButton.textContent; // Update the displayed option
-        updateBoard("hard.txt");
+        updateBoard(newBoard);
     });
 
     expertButton.addEventListener('click', function() {
+        clearBoard();
+        generateExpertBoard(board);
         selectedOption.textContent = "Difficulty Selected: " + expertButton.textContent; // Update the displayed option
-        updateBoard("expert.txt");
+        updateBoard(newBoard);
     });
 
     solve.addEventListener('click', function() {
