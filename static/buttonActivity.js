@@ -1,4 +1,4 @@
-import { generateEasyBoard, generateMediumBoard, generateHardBoard, generateExpertBoard } from "../static/boardActivity.js";
+import { generateEasyBoard, generateMediumBoard, generateHardBoard, generateExpertBoard, solveBoard } from "../static/boardActivity.js";
 import { newBoard } from "../static/boardActivity.js";
 
 var board;
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const manuallyEnterButton = document.querySelector('#manually-enter');
     const randomlyGenerateButton = document.querySelector('#randomly-generate');
     const selectedOption = document.querySelector('#selected-option'); // The paragraph to display the selected option
-    const solve = document.querySelector('#solve');
-
+    
+    const solveButton = document.querySelector('#solve-button');
     const easyButton = document.querySelector('#easy-button');
     const mediumButton = document.querySelector('#medium-button');
     const hardButton = document.querySelector('#hard-button');
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sudokuCells.forEach(cell => {
             cell.setAttribute("contenteditable", "true");
         });
-        solve.disabled = false;
+        solveButton.disabled = false;
     });
 
     randomlyGenerateButton.addEventListener('click', function() {
@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clearBoard();
         randomlyGenerateButton.disabled = true;
         manuallyEnterButton.disabled = false;
+        solveButton.disabled = true;
         difficultyButtons.forEach(button => button.disabled = false);
         selectedOption.textContent = "Selected Option: Randomly Generated"; // Update the displayed option
         sudokuCells.forEach(cell => {
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     easyButton.addEventListener('click', function() {
         clearBoard();
         generateEasyBoard(board);
+        solveButton.disabled = false;
         selectedOption.textContent = "Difficulty Selected: " + easyButton.textContent; // Update the displayed option
         updateBoard(newBoard);
     });
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     mediumButton.addEventListener('click', function() {
         clearBoard();
         generateMediumBoard(board);
+        solveButton.disabled = false;
         selectedOption.textContent = "Difficulty Selected: " + mediumButton.textContent; // Update the displayed option
         updateBoard(newBoard);
     });
@@ -85,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     hardButton.addEventListener('click', function() {
         clearBoard();
         generateHardBoard(board);
+        solveButton.disabled = false;
         selectedOption.textContent = "Difficulty Selected: " + hardButton.textContent; // Update the displayed option
         updateBoard(newBoard);
     });
@@ -92,12 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
     expertButton.addEventListener('click', function() {
         clearBoard();
         generateExpertBoard(board);
+        solveButton.disabled = false;
         selectedOption.textContent = "Difficulty Selected: " + expertButton.textContent; // Update the displayed option
         updateBoard(newBoard);
     });
 
-    solve.addEventListener('click', function() {
-        // might write this in python
+    solveButton.addEventListener('click', function() {
+        solveBoard(board);
+        updateBoard(newBoard);
     });
 
     sudokuCells.forEach(cell => {
